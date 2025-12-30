@@ -18,3 +18,16 @@ def split_data(df: pd.DataFrame, test_size=0.2, random_state=42):
         train_val_df, test_size=0.25, random_state=random_state)
 
     return train_df, val_df, test_df
+
+
+def split_features_target(df=pd.DataFrame):
+    """Split the DataFrame into features and target variable.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to split.
+    """
+
+    X = df.drop(columns=['Churn Value'])
+    y = df['Churn Value']
+
+    return X, y
