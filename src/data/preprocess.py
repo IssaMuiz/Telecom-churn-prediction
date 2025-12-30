@@ -29,7 +29,7 @@ def onehotencoding(df: pd.DataFrame):
     df = df.drop(columns=cat_cols, axis=1)  # Drop original categorical columns
     df = pd.concat([df, df_encoded], axis=1)  # Concatenate the encoded columns
 
-    return df.head()
+    return df
 
 
 def standard_scaling(df: pd.DataFrame):
@@ -66,7 +66,7 @@ def onehotencoding_for_non_train_set(df: pd.DataFrame):
     df = df.drop(columns=cat_cols, axis=1)  # Drop original categorical columns
     df = pd.concat([df, df_encoded], axis=1)  # Concatenate the encoded columns
 
-    return df.head()
+    return df
 
 
 def standard_scaling_for_non_train_set(df: pd.DataFrame):
