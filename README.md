@@ -19,6 +19,7 @@ and deployment readiness.
 - Data cleaning and preprocessing refactored from notebooks to Python modules
 - Modular project structure established
 - Pipeline-based preprocessing designed to prevent data leakage
+- Baseline modeling
 
 ## Tech Stack
 
@@ -29,11 +30,15 @@ and deployment readiness.
 
 ## Next Steps
 
+- Baseline modeling
+- Error analysing and feature engineering
 - Build full preprocessing + model pipeline
-- Model evaluation and validation
-- Model persistence
-- Inference script
-- Deployment (later stage)
+- Artifact creation
+- Model training and tuning
+- Final evaluation (test set)
+- Unit testing
+- Model packaging and deployment readiness
+- Monitoring and maintenance plan
 
 ## Author
 
