@@ -1,23 +1,23 @@
 from sklearn.metrics import roc_auc_score, classification_report
 
 
-def evaluate_baseline_model(model, X_val, y_val):
+def evaluate_baseline_model(model, X_test, y_test):
     """
     Evaluate the provided Logistic Regression model on the test data.
 
     Parameters:
     model (LogisticRegression): The trained Logistic Regression model to be evaluated.
-    X_val (array-like): Test feature data.
-    y_val (array-like): True labels for the test data.
+    X_test (array-like): Test feature data.
+    y_test (array-like): True labels for the test data.
 
     Returns:
     dict: A dictionary containing evaluation metrics including AUC-ROC and classification report.
     """
-    y_pred = model.predict(X_val)
-    y_proba = model.predict_proba(X_val)[:, 1]
+    y_pred = model.predict(X_test)
+    y_proba = model.predict_proba(X_test)[:, 1]
 
-    auc_roc = roc_auc_score(y_val, y_proba)
-    class_report = classification_report(y_val, y_pred, output_dict=True)
+    auc_roc = roc_auc_score(y_test, y_proba)
+    class_report = classification_report(y_test, y_pred, output_dict=True)
 
     evaluation_metrics = {
         'AUC-ROC': auc_roc,

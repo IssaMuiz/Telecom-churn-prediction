@@ -1,5 +1,4 @@
 from sklearn.linear_model import LogisticRegression
-from src.models.evaluate import evaluate_baseline_model
 
 
 def build_baseline_model(random_state=42):
@@ -30,24 +29,3 @@ def train_baseline_model(model, X_train, y_train):
     """
     model.fit(X_train, y_train)
     return model
-
-
-def run_baseline_model(X_train, y_train, X_val, y_val):
-    """
-    Build, train, and evaluate a baseline Logistic Regression model.
-
-    Parameters:
-    X_train (array-like): Training feature data.
-    y_train (array-like): Training target labels.
-    X_val (array-like): Validation feature data.
-    y_val (array-like): Validation target labels.
-
-    Returns:
-    dict: A dictionary containing evaluation metrics of the trained model.
-    """
-    model = build_baseline_model()
-    trained_model = train_baseline_model(model, X_train, y_train)
-
-    evaluation_metrics = evaluate_baseline_model(trained_model, X_val, y_val)
-
-    return evaluation_metrics

@@ -32,7 +32,7 @@ def train_baseline_model(model, X_train, y_train):
     return model
 
 
-def run_baseline_model(X_train, y_train, X_val, y_val):
+def run_baseline_mode(X_train, y_train, X_val, y_val):
     """
     Build, train, and evaluate a baseline Logistic Regression model.
 
