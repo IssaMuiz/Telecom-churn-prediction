@@ -35,7 +35,8 @@ def onehotencoding(df: pd.DataFrame):
 def standard_scaling(df: pd.DataFrame):
     """Apply standard scaling to specified numeric columns in a pandas DataFrame.
     """
-    num_cols = ['Tenure Months', 'Monthly Charges', 'Total Charges']
+    num_cols = df.select_dtypes(include=np.number).columns.tolist()
+    num_cols.remove('Churn Value')
     df[num_cols] = scaler.fit_transform(df[num_cols])
     return df[num_cols].head()
 
@@ -71,6 +72,19 @@ def onehotencoding_for_non_train_set(df: pd.DataFrame):
 def standard_scaling_for_non_train_set(df: pd.DataFrame):
     """Apply standard scaling to specified numeric columns in a pandas DataFrame.
     """
-    num_cols = ['Tenure Months', 'Monthly Charges', 'Total Charges']
+    num_cols = df.select_dtypes(include=np.number).columns.tolist()
+    num_cols.remove('Churn Value')
     df[num_cols] = scaler.transform(df[num_cols])
     return df[num_cols].head()
+
+
+def normalize_with_log(df: pd.DataFrame, column: list[str]):
+    """ Apply log normalization to a list of columns in a pandas DataFrame.
+
+    Args:
+        df (pd.DataFrame): The DataFrame in which to apply log normalization.
+        column (list[str]): The column names to normalize.
+    """
+    for col in column:
+        df[col + "_log"] = np.log1p(df[col])
+    return df.head()

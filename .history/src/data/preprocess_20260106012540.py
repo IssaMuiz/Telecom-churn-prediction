@@ -36,6 +36,7 @@ def standard_scaling(df: pd.DataFrame):
     """Apply standard scaling to specified numeric columns in a pandas DataFrame.
     """
     num_cols = ['Tenure Months', 'Monthly Charges', 'Total Charges']
+    num_cols.remove('Churn Value')
     df[num_cols] = scaler.fit_transform(df[num_cols])
     return df[num_cols].head()
 
@@ -72,5 +73,6 @@ def standard_scaling_for_non_train_set(df: pd.DataFrame):
     """Apply standard scaling to specified numeric columns in a pandas DataFrame.
     """
     num_cols = ['Tenure Months', 'Monthly Charges', 'Total Charges']
+    num_cols.remove('Churn Value')
     df[num_cols] = scaler.transform(df[num_cols])
     return df[num_cols].head()
