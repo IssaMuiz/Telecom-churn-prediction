@@ -1,9 +1,9 @@
 import pandas as pd
-import numpy as np
+from src.features.features_construction import (
+    tenure_months_log, total_charges_log)
 
-num_cols = ['Tenure Months',
-            'Monthly Charges',
-            'Total Charges',]
+num_cols = [
+    'Monthly Charges',]
 
 
 cat_cols = ['Gender',
@@ -27,11 +27,10 @@ cat_cols = ['Gender',
 def add_engineered_features(df: pd.DataFrame):
     """Add all engineered features to the DataFrame."""
 
-    df['Tenure_months_log'] = np.log1p(df['Tenure Months'])
-    df['Total_Charges_log'] = np.log1p(df['Total Charges'])
-    df['no_family'] = ((df['Dependents'] == 'No') &
-                       (df['Partner'] == 'No')).astype(int)
-
-    df.drop(columns=['Tenure Months', 'Total Charges'])
+    df['Tenure_months_log'] = tenure_months_log(df)
+    df['Total_Charges_log'] = total_charges_log(df)
+    if 'Dependents' in df.columns and 'Partner' in df.columns:
+        df['no_family'] = ((df['Dependents'] == 'No') &
+                           (df['Partner'] == 'No')).astype(int)
 
     return df

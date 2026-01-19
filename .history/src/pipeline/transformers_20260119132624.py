@@ -2,14 +2,13 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.pipeline import Pipeline
 from src.pipeline.build_pipeline import num_pipeline, cat_pipeline
-from src.pipeline.features import cat_cols, add_engineered_features
+from src.pipeline.features import num_cols, cat_cols, add_engineered_features
 
 
 feature_engineering = FunctionTransformer(
-    # Transformer to add engineered features
     add_engineered_features, validate=False)
 
-# Build the complete preprocessing pipeline
+
 pipeline_preprocessing = Pipeline(steps=[('feature_engineering', feature_engineering),
                                          ('column_transformer', ColumnTransformer(transformers=[
                                              ('num_pipeline', num_pipeline, [

@@ -1,9 +1,8 @@
 import pandas as pd
 import numpy as np
 
-num_cols = ['Tenure Months',
-            'Monthly Charges',
-            'Total Charges',]
+num_cols = [
+    'Monthly Charges']
 
 
 cat_cols = ['Gender',
@@ -31,7 +30,5 @@ def add_engineered_features(df: pd.DataFrame):
     df['Total_Charges_log'] = np.log1p(df['Total Charges'])
     df['no_family'] = ((df['Dependents'] == 'No') &
                        (df['Partner'] == 'No')).astype(int)
-
-    df.drop(columns=['Tenure Months', 'Total Charges'])
 
     return df

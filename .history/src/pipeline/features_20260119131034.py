@@ -32,6 +32,4 @@ def add_engineered_features(df: pd.DataFrame):
     df['no_family'] = ((df['Dependents'] == 'No') &
                        (df['Partner'] == 'No')).astype(int)
 
-    df.drop(columns=['Tenure Months', 'Total Charges'])
-
     return df

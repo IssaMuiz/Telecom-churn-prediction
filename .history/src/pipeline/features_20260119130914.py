@@ -29,9 +29,8 @@ def add_engineered_features(df: pd.DataFrame):
 
     df['Tenure_months_log'] = np.log1p(df['Tenure Months'])
     df['Total_Charges_log'] = np.log1p(df['Total Charges'])
-    df['no_family'] = ((df['Dependents'] == 'No') &
-                       (df['Partner'] == 'No')).astype(int)
-
-    df.drop(columns=['Tenure Months', 'Total Charges'])
+    if 'Dependents' in df.columns and 'Partner' in df.columns:
+        df['no_family'] = ((df['Dependents'] == 'No') &
+                           (df['Partner'] == 'No')).astype(int)
 
     return df

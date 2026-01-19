@@ -2,17 +2,18 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
+from src.pipeline.features import add_engineered_features
+import pandas as pd
 
+df = pd.DataFrame()  # Placeholder for the DataFrame input
 
-# Define pipelines for numerical and categorical features
 num_pipeline = Pipeline(steps=[
-    # Impute missing values with median
     ('imputer', SimpleImputer(strategy='median')),
-    ('scale', StandardScaler())  # Standardize numerical features
+    ('scale', StandardScaler())
 ])
 
 
 cat_pipeline = Pipeline(steps=[
-    # One-hot encode categorical features
+    ('add_engineered_features', add_engineered_features(df)),
     ('encode', OneHotEncoder(handle_unknown='ignore', sparse_output=False))
 ])

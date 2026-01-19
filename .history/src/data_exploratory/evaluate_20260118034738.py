@@ -13,6 +13,7 @@ def evaluate_baseline_model(model, X_val, y_val):
     Returns:
     dict: A dictionary containing evaluation metrics including AUC-ROC and classification report.
     """
+    y_pred = model.predict(X_val)
     y_proba = model.predict_proba(X_val)[:, 1]
 
     threshold = 0.3

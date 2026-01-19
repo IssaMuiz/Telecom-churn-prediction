@@ -77,12 +77,10 @@ def no_family(df: pd.DataFrame):
 def tenure_months_log(df: pd.DataFrame):
     """Log transformation of Tenure Months to reduce skewness."""
     df['Tenure_months_log'] = np.log1p(df['Tenure Months'])
-    df.drop(columns=['Tenure Months'], axis=1)
     return df.head()
 
 
 def total_charges_log(df: pd.DataFrame):
     """Log transformation of Total Charges to reduce skewness."""
     df['Total_Charges_log'] = np.log1p(df['Total Charges'])
-    df.drop(columns=['Total Charges'], axis=1)
     return df.head()

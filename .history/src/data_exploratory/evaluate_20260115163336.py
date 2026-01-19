@@ -13,15 +13,15 @@ def evaluate_baseline_model(model, X_val, y_val):
     Returns:
     dict: A dictionary containing evaluation metrics including AUC-ROC and classification report.
     """
+    y_pred = model.predict(X_val)
     y_proba = model.predict_proba(X_val)[:, 1]
 
     threshold = 0.3
+    y_pred_custom = (y_proba >= threshold).astype(int)
 
-    custom_y_pred = (y_proba >= threshold)
+    auc_roc = roc_auc_score(y_val, y_pred_custom)
+    class_report = classification_report(y_val, y_pred, output_dict=True)
 
-    auc_roc = roc_auc_score(y_val, y_proba)
-    class_report = classification_report(
-        y_val, custom_y_pred, output_dict=True)
     evaluation_metrics = {
         'AUC-ROC': auc_roc,
         'Classification Report': class_report

@@ -6,7 +6,6 @@ from src.pipeline.features import cat_cols, add_engineered_features
 
 
 feature_engineering = FunctionTransformer(
-    # Transformer to add engineered features
     add_engineered_features, validate=False)
 
 # Build the complete preprocessing pipeline
