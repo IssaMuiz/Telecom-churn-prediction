@@ -1,0 +1,45 @@
+import os
+import joblib
+import json
+from datetime import datetime
+
+
+def save_model(model, version='v1'):
+    """
+    Docstring for save_model
+
+    :param model: Description
+    :param version: Description
+    """
+    os.mkdir('artifacts/models/', exist_ok=True)
+    path = f'artifacts/models/churn_model_{version}.pkl'
+    joblib.dump(model, path)
+    return path
+
+
+def save_metrics(metrics, version='v1'):
+    """
+    Docstring for save_metrics
+
+    :param metrics: Description
+    :param version: Description
+    """
+    os.mkdir('artifacts/metrics/', exist_ok=True)
+    path = f'artifacts/metrics/metrics_{version}.json'
+    with open(path, 'w') as f:
+        json.dump(metrics, f)
+    return path
+
+
+def save_config(config, version='v1'):
+    """
+    Docstring for save_config
+
+    :param config: Description
+    :param version: Description
+    """
+    os.mkdir('artifacts/configs/', exist_ok=True)
+    path = f'artifacts/configs/config_{version}.json'
+    with open(path, 'w') as f:
+        json.dump(config, f)
+    return path

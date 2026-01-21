@@ -107,27 +107,3 @@ def check_number_of_unique_values(df: pd.DataFrame):
 
     unique_values = df.select_dtypes(include='object').nunique()
     return unique_values
-
-
-def clean_data(df: pd.DataFrame):
-    """Perform a series of data cleaning steps on a pandas DataFrame.
-
-    Args:
-        df (pd.DataFrame): The DataFrame to clean.
-    """
-
-    # Drop unused columns
-    unused_columns = ['Country', 'Zip Code', 'State', 'City', 'CustomerID', 'Longitude',
-                      'Latitude', 'Lat Long', 'Count', 'Churn Label', 'Churn Score', 'Churn Reason', 'CLTV']
-    df = drop_unused_columns(df, unused_columns)
-
-    # Replace empty strings with NaN
-    df = replace_empty_string(df)
-
-    # Drop duplicated rows
-    df = drop_duplicated_rows(df)
-
-    # Convert 'Total Charges' to numeric
-    df['Total Charges'] = pd.to_numeric(df['Total Charges'], errors='coerce')
-
-    return df
