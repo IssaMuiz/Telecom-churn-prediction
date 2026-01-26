@@ -40,4 +40,4 @@ def run_pipeline(X_train, y_train):
 
     best_estimator = lr_grid.best_estimator_
 
-    return best_estimator  # Return the trained pipeline
+    return pipeline  # Return the trained pipeline

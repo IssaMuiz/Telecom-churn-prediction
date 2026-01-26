@@ -14,20 +14,18 @@ def run_pipeline(X_train, y_train):
     y_train (array-like): Training target labels.
     """
 
-# Create a pipeline with preprocessing and model
-    pipeline = make_pipeline(pipeline_preprocessing,
-                             LogisticRegression(random_state=45, max_iter=1000))
     # Initialize Logistic Regression model
+    lr = LogisticRegression(random_state=45)
 
     param_grid = [{
-        'logisticregression__C': [0.01, 0.1, 1.0, 10,],
-        'logisticregression__penalty': ['l1', 'l2'],
-        'logisticregression__solver': ['liblinear'],
-        'logisticregression__class_weight': [None, 'balanced']
+        'C': [0.01, 0.1, 1.0, 10,],
+        'penalty': ['l1', 'l2'],
+        'solver': ['liblinear'],
+        'class_weight': [None, 'balanced']
     }]
 
     lr_grid = GridSearchCV(
-        estimator=pipeline,
+        estimator=lr,
         param_grid=param_grid,
         scoring=['recall'],
         refit='recall',
@@ -40,4 +38,8 @@ def run_pipeline(X_train, y_train):
 
     best_estimator = lr_grid.best_estimator_
 
-    return best_estimator  # Return the trained pipeline
+    # Create a pipeline with preprocessing and model
+    pipeline = make_pipeline(pipeline_preprocessing, best_estimator)
+    pipeline.fit(X_train, y_train)  # Train the pipeline
+
+    return pipeline  # Return the trained pipeline

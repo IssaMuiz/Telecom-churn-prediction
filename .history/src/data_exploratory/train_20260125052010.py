@@ -1,7 +1,6 @@
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import StratifiedKFold, cross_val_score
 from src.data_exploratory.evaluate import evaluate_model
-from sklearn.ensemble import RandomForestClassifier
 
 
 def build_model(random_state=42):
@@ -36,7 +35,7 @@ def train_model(model, X_train, y_train):
     return model
 
 
-def run_model(X_train, y_train, X_val, y_val):
+def run_baseline_model(X_train, y_train, X_val, y_val):
     """
     Build, train, and evaluate a baseline Logistic Regression model.
 
@@ -55,72 +54,3 @@ def run_model(X_train, y_train, X_val, y_val):
     evaluation_metrics = evaluate_model(trained_model, X_val, y_val)
 
     return evaluation_metrics
-
-
-def lr_model_tuning(X_train, y_train):
-    """
-
-    """
-    lr = LogisticRegression(random_state=45)
-
-    param_grid = [{
-        'C': [0.01, 0.1, 1.0, 10,],
-        'penalty': ['l1', 'l2'],
-        'solver': ['liblinear'],
-        'class_weight': [None, 'balanced']
-    }]
-
-    lr_grid = GridSearchCV(
-        estimator=lr,
-        param_grid=param_grid,
-        scoring=['recall'],
-        refit='recall',
-        cv=5,
-        n_jobs=-1,
-        error_score='raise'
-    )
-
-    lr_grid.fit(X_train, y_train)
-
-    best_estimator = lr_grid.best_estimator_
-
-    tuning_metrics = {
-        'best_score': lr_grid.best_score_,
-        'best_params': lr_grid.best_params_
-    }
-
-    return best_estimator, tuning_metrics
-
-
-def rf_model_tuning(X_train, y_train):
-    """
-
-    """
-    rf = RandomForestClassifier(random_state=45)
-
-    param_grid = [{
-        'n_estimators': [500, 1000, 1500],
-        'criterion': ['entropy', 'gini'],
-        'max_depth': [10, 20, 30],
-        'min_samples_split': [5, 10, 15],
-        'min_samples_leaf': [1, 2, 4],
-    }]
-
-    rf_grid = GridSearchCV(
-        estimator=rf,
-        param_grid=param_grid,
-        scoring=['recall'],
-        refit='recall',
-        cv=5,
-        n_jobs=-1,
-        error_score='raise'
-    )
-
-    rf_grid.fit(X_train, y_train)
-
-    tuning_metrics = {
-        'best_score': rf_grid.best_score_,
-        'best_params': rf_grid.best_params_
-    }
-
-    return tuning_metrics

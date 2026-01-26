@@ -10,7 +10,7 @@ def save_model(model, version='v2'):
     :param model: Description
     :param version: Description
     """
-    os.makedirs('artifacts/models/', exist_ok=True)
+    os.mkdir('artifacts/models/')
     path = f'artifacts/models/churn_model_{version}.pkl'
     joblib.dump(model, path)
     return path
@@ -23,7 +23,7 @@ def save_metrics(metrics, version='v2'):
     :param metrics: Description
     :param version: Description
     """
-    os.makedirs('artifacts/metrics/', exist_ok=True)
+    os.mkdir('artifacts/metrics/')
     path = f'artifacts/metrics/metrics_{version}.json'
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(metrics, f, indent=4)
@@ -37,7 +37,7 @@ def save_config(config, version='v2'):
     :param config: Description
     :param version: Description
     """
-    os.makedirs('artifacts/configs/', exist_ok=True)
+    os.mkdir('artifacts/configs/')
     path = f'artifacts/configs/config_{version}.json'
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(config, f, indent=4)

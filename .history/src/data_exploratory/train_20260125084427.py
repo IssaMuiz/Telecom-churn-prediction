@@ -82,14 +82,12 @@ def lr_model_tuning(X_train, y_train):
 
     lr_grid.fit(X_train, y_train)
 
-    best_estimator = lr_grid.best_estimator_
-
     tuning_metrics = {
         'best_score': lr_grid.best_score_,
         'best_params': lr_grid.best_params_
     }
 
-    return best_estimator, tuning_metrics
+    return tuning_metrics
 
 
 def rf_model_tuning(X_train, y_train):

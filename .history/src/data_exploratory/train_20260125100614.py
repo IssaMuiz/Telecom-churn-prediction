@@ -89,7 +89,7 @@ def lr_model_tuning(X_train, y_train):
         'best_params': lr_grid.best_params_
     }
 
-    return best_estimator, tuning_metrics
+    return tuning_metrics
 
 
 def rf_model_tuning(X_train, y_train):
