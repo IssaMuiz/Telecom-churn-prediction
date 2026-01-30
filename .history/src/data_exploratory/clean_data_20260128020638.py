@@ -82,7 +82,7 @@ def change_to_numeric(df: pd.DataFrame, column: str):
 
     """
     df[column] = pd.to_numeric(df[column], errors='coerce')
-    return df
+    return df[column]
 
 
 def check_value_counts(df: pd.DataFrame):
