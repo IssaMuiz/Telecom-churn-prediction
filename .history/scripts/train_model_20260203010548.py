@@ -1,7 +1,7 @@
 import sys
 from src.pipeline.train import run_pipeline
 from src.pipeline.evaluate import evaluate_model
-from src.model_registry import save_model, save_metrics, save_config
+from model_registry import save_model, save_metrics, save_config
 from src.config import MODEL_CONFIG_V2
 from scripts.prepare_data import X_train, X_val, y_train, y_val, X_test, y_test
 sys.path.append('..')

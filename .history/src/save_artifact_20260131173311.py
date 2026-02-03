@@ -10,8 +10,9 @@ def save_model(model, version='v3'):
     :param model: Description
     :param version: Description
     """
-    os.makedirs('artifacts/models/', exist_ok=True)  # Ensure directory exists
-    # Define the file path
+    os.makedirs('artifacts/models/',
+                exist_ok=True)  # create directory if it doesn't exist
+    # define the path to save the model
     path = f'artifacts/models/churn_model_{version}.pkl'
     joblib.dump(model, path)  # Save the model using joblib
     return path  # Return the path where the model is saved
@@ -43,3 +44,14 @@ def save_config(config, version='v3'):
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(config, f, indent=4)
     return path
+
+
+def load_model(version='v3'):
+    """
+    Docstring for load_model
+
+    :param version: Description
+    """
+    path = f'artifacts/models/churn_model_{version}.pkl'
+    model = joblib.load(path)  # Load the model using joblib
+    return model  # Return the loaded model

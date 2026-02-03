@@ -54,7 +54,7 @@ def test_run_pipeline(raw_data):
     # splitting the train into features and target
     X_train, y_train = split_features_target(X)
     # splitting the validation into features and target
-    X_val, _ = split_features_target(y)
+    X_val, y_val = split_features_target(y)
 
     model = run_pipeline(X_train, y_train)
     pred = model.predict(X_val)
